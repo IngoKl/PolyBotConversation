@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PolyBotConversation</title>
+        {% load static %}
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
+
+        <script src="{% static 'js/htmx.min.js' %}" defer></script>
+        <script src="{% static 'js/bootstrap.min.js' %}" defer></script>
+
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/chat.css' %}" rel="stylesheet">
+    </head>
+
+    <body>
+    <div class="d-flex" style="min-height: 100vh;">
+
+        {% include "chat/partials/sidebar.html" %}
+
+        <div class="main-content flex-grow-1">
+            {% block content %}{% endblock content %}
+        </div>
+    </div>
+    </body>
+</html>

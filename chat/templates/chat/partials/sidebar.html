@@ -1,0 +1,39 @@
+<div class="sidebar d-flex flex-column">
+    <p class="text-center sidebar-header"><strong>P</strong>oly<strong>B</strong>ot<strong>C</strong>onversation</p>
+    <span class="text-center version">{{ version }}</span>
+
+    {% if user.is_authenticated %}
+    <p class="sidebar-heading">Conversations</p>
+    <a href="{% url 'chat:chat_new' %}" style="margin: 15px;" class="nav-item btn btn-light">New</a>
+    <ul class="nav flex-column">
+        {% for conversation in conversations %}
+            <li class="nav-item">
+                <a class="nav-link" href="/chat/{{ conversation.uuid }}">
+                    <span>{{ conversation.title }}</span><br><span class="sidebar-timestamp">{{ conversation.creation_date }}</span>
+                </a>
+            </li>
+        {% empty %}
+            <li class="nav-item">
+                <span class="nav-link">No conversations available</span>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'chat:chat_clear' %}" style="margin: 15px;" class="nav-item btn btn-danger">Clear Chats</a>
+
+    <hr>
+    
+    <ul class="nav flex-column">
+        <li class="nav-item mt-auto">
+            <a class="text-center nav-link" href="{% url 'chat:user' %}">🔧 {{ user.first_name }} {{ user.last_name }}</a>
+        </li>
+    </ul>
+
+    <div class="nav flex-colum justify-content-center">
+        <form class="nav-item" action="{% url 'chat:logout' %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-secondary" style="width:200px; margin: 15px;" type="submit">Log Out</button>
+        </form>
+    </div>
+    {% endif %}
+</div>

@@ -1,0 +1,21 @@
+<ul class="list-group" id="message-list" style="list-style-type: none; padding: 0;">
+    {% for message in messages %}
+        <li class="d-flex {% if message.participant.user == request.user %}justify-content-end{% else %}justify-content-start{% endif %} mb-2">
+            <div class="{% if message.participant.user == request.user %}user-message{% else %}other-message{% endif %}">
+                <span class="message-username">
+                    {% if message.participant.participant_type == 'user' %}
+                        {{ message.participant.user.username }}
+                    {% elif message.participant.participant_type == 'bot' %}
+                        {{ message.participant.bot.name }} (Bot)
+                    {% endif %}
+                </span>
+                <br>
+                {{ message.message }}
+                <br>
+                <span class="message-timestamp">{{ message.timestamp|date:"H:i:s" }}</span>
+            </div>
+        </li>
+    {% empty %}
+        <li class="text-center text-muted">No messages yet.</li>
+    {% endfor %}
+</ul>

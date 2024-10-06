@@ -1,0 +1,52 @@
+{% extends "chat/base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center mb-3">
+        <h1>{{ conversation.title }}</h1>
+        <p>Created on {{ conversation.creation_date }}</p>
+        <div class="d-flex flex-wrap justify-content-center" id="participants-list">
+            {% for participant in participants %}
+                {% if participant.participant_type == 'user' %}
+                    <div class="participant-card-user m-1 p-2">
+                        <span class="participant-name">{{ participant.user.username }}</span>
+                    </div>
+                {% elif participant.participant_type == 'bot' %}
+                    <div class="participant-card-bot m-1 p-2">
+                        <span class="participant-name">{{ participant.bot.name }} (Bot)</span>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <a href="{% url 'chat:manage_bots_in_conversation' conversation.uuid %}" class="btn btn-secondary mt-3">Modify Bots</a>
+        <a href="{% url 'chat:manage_triggers_for_conversation' conversation.uuid %}" class="btn btn-secondary mt-3">Modify Triggers</a>
+        <a href="{% url 'chat:chat_delete' conversation.uuid %}" class="btn btn-warning mt-3">Delete</a>
+    </div>
+</div>
+
+<div class="container chat-container">
+    <hr class="border-bottom border-1 border-dark">
+    
+    <div class="chat-message" id="chat-messages" 
+         hx-get="{% url 'chat:load_messages' conversation.uuid %}" 
+         hx-trigger="load, every 2s"
+         hx-swap="innerHTML">
+        {% include "chat/partials/messages.html" %}
+    </div>
+    
+    <hr class="border-bottom border-1 border-dark">
+
+    <div class="mt-3" style="padding-bottom: 20px;">
+        <form method="post" id="chat-form" class="d-flex"
+              hx-post="{% url 'chat:send_message' conversation.uuid %}"
+              hx-target="#chat-messages"
+              hx-swap="innerHTML"
+              hx-trigger="submit"
+              hx-on::after-request="document.getElementById('message-input').value = ''">
+            {% csrf_token %}
+            <input type="text" id="message-input" name="message" class="form-control me-2 chat-input" autocomplete="off" placeholder="Type your message..." required>
+            <button type="submit" class="btn chat-btn">Send</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends "chat/base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Manage Bots in Conversation: {{ conversation.title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Update Bots</button>
+    </form>
+</div>
+{% endblock %}
