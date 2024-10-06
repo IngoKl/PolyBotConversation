@@ -57,6 +57,17 @@ python manage.py qcluster
 
 Feel free to tinker around with this and make suggestions! PRs are absolutely welcome!
 
+### Notes for Developers
+
+Here are a few notes about the design of the application that hopefully will help you to get started!
+
+* The application makes heavy use of `django-q2`. `tasks.py` holds the key tasks that are being performed by the task manager. Some tasks are being issued on the fly, e.g., the generation of core memories in `views.py`.
+* There is a simple "prompt library" in `prompt_templates.py`. These are populated using `.format()` before usage with the API.
+* `bot.py` contains functions for generating messages and replying in conversations. `llm.py` contains functions for interacting with the OpenAI (compatible) endpoint and other LLM tasks.
+* The general flow looks like this: A task (`tasks.py`) runs triggers from `triggers.py`. These use functions from `bot.py` (which uses `llm.py`) in order to generate new message.
+
+### Linting and Formatting
+
 `isort` and `ruff` are used for linting and formatting. I don't particularly like PEP-8's maximum line length, so ...
 
 ```bash
