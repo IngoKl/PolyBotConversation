@@ -61,6 +61,7 @@ Feel free to tinker around with this and make suggestions! PRs are absolutely we
 
 Here are a few notes about the design of the application that hopefully will help you to get started!
 
+* The application is based on [Django](https://www.djangoproject.com/) and uses [htmx](https://htmx.org/) for the chat itself. [Bootstrap](https://getbootstrap.com/) is used as a CSS framework. Both htmx and bootstrap are shipped here in the `static/js` folder. Of course, they don't fall under the same license as this project.
 * The application makes heavy use of `django-q2`. `tasks.py` holds the key tasks that are being performed by the task manager. Some tasks are being issued on the fly, e.g., the generation of core memories in `views.py`.
 * There is a simple "prompt library" in `prompt_templates.py`. These are populated using `.format()` before usage with the API.
 * `bot.py` contains functions for generating messages and replying in conversations. `llm.py` contains functions for interacting with the OpenAI (compatible) endpoint and other LLM tasks.
