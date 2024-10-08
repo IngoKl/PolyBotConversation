@@ -1,7 +1,10 @@
 <ul class="list-group" id="message-list" style="list-style-type: none; padding: 0;">
     {% for message in messages %}
         <li class="d-flex {% if message.participant.user == request.user %}justify-content-end{% else %}justify-content-start{% endif %} mb-2">
-            <div class="{% if message.participant.user == request.user %}user-message{% else %}other-message{% endif %}">
+            <div 
+                class="{% if message.participant.user == request.user %}user-message{% else %}other-message{% endif %}" 
+                style="{% if message.participant.user != request.user %}background-color: {{ message.participant.bot.color }} !important {% endif %}"
+            >
                 <span class="message-username">
                     {% if message.participant.participant_type == 'user' %}
                         {{ message.participant.user.username }}

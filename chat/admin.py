@@ -1,14 +1,6 @@
 from django.contrib import admin
 
-from chat.models import (
-    Bot,
-    Conversation,
-    CoreMemory,
-    LLMRequest,
-    Message,
-    Participant,
-    Trigger,
-)
+from chat.models import Bot, Conversation, CoreMemory, LLMRequest, Message, Participant, Trigger
 
 
 class CoreMemoryInline(admin.TabularInline):

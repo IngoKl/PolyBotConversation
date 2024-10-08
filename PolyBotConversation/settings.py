@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 
 STATIC_URL = "static/"
 

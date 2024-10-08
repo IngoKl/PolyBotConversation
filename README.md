@@ -8,6 +8,13 @@ For additional background, have a look at my blog post ["PolyBotConversation –
 
 PolyBotConversation is purely experimental software and *not* designed for production. Most importantly, there are severe security and privacy implications. For example, conversations are not protected, and all users can see all conversations. Furthermore, due to the fact that "core memories" are, by default, generated for all conversations and bots, information will be retained after the deletion of chats.
 
+## Key Features
+
+* Multi-user (group) chats with both humans and LLM-powered chatbots with individual "personalities"
+* @mention and conversation-based triggers for chatbot responses
+* Automatically establishing so-called "core memories" that shape a bot's "personality" across conversation
+* Automatically naming conversations (LLM-powered)
+
 ## Setup
 
 ### Python Environment

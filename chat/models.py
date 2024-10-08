@@ -8,6 +8,7 @@ class Bot(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
+    color = models.CharField(max_length=18, default="#cd5334ff")
     model = models.CharField(max_length=255)
     prompt = models.TextField()
     temperature = models.FloatField(default=0.8)

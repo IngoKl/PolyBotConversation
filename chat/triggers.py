@@ -26,4 +26,3 @@ def general(conversation):
     for bot in bots:
         generate_message_general(conversation, bot)
         time.sleep(5)
-
